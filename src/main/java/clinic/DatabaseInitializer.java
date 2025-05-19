@@ -54,7 +54,8 @@ doctor_login TEXT,
 nurse_login TEXT,
 status TEXT,
 date_assigned TEXT,
-date_done TEXT
+date_done TEXT,
+UNIQUE(description, doctor_login, nurse_login, date_assigned)
 );
 """;
 
@@ -63,7 +64,8 @@ date_done TEXT
 CREATE TABLE IF NOT EXISTS procedures (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 description TEXT,
-patient_login TEXT
+patient_login TEXT,
+UNIQUE(description, patient_login)
 );
 """;
 
@@ -111,8 +113,8 @@ INSERT OR IGNORE INTO staff (name, role, salary, hire_date) VALUES
 ('Главврач Иванова', 'chief', 500000, '2021-06-10');
 """);
 
-// stmt.execute("INSERT OR IGNORE INTO procedures (description, patient_login) VALUES ('Измерить давление', 'patient1')");
-// stmt.execute("INSERT OR IGNORE INTO tasks (description, doctor_login, nurse_login, status, date_assigned) VALUES ('Поставить капельницу', 'doc1', 'nurse1', 'pending', '2025-05-14')");
+ stmt.execute("INSERT OR IGNORE INTO procedures (description, patient_login) VALUES ('Измерить давление', 'patient1')");
+ stmt.execute("INSERT OR IGNORE INTO tasks (description, doctor_login, nurse_login, status, date_assigned) VALUES ('Поставить капельницу', 'doc1', 'nurse1', 'pending', '2025-05-14')");
 
 
             System.out.println("✅ База данных инициализирована.");
